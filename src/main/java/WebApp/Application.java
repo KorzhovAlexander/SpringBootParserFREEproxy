@@ -31,13 +31,13 @@ public class Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        while (true) {/*
+        while (true) {
             searchRepository.deleteAll();
             searchRepository.autoincrementNull();
             proxysocksRepository.deleteAll();
             proxysocksRepository.autoincrementNull();
             socksProxyNet80.startPars();
-            spysComPage500.startPars();*/
+            spysComPage500.startPars();
             System.out.println("ok");
             Thread.sleep(600000);
         }

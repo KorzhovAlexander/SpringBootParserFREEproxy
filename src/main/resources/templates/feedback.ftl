@@ -9,7 +9,7 @@
   <#if feedback??>
             <#list feedback as feedback>
 <form method="post" action="/feedback">
-<div class="card mt-3 mx-auto " style=" <#if feedback.add>box-shadow: 0 0 2px blue</#if>">
+<div class="card mt-3 mx-2 " style=" <#if feedback.add>box-shadow: 0 0 2px blue</#if>">
     <div class="card-body ">
         <h5 class="card-title">${feedback.theme}</h5>
 <#if feedback.user.mail??>
@@ -17,8 +17,12 @@
 </#if>
 
         <p class="card-text">${feedback.feedback}</p>
-        <input type="submit" class="card-link" value="Published" name="Published">
-        <input type="submit" class="card-link" value="Delete" name="Delete">
+        <div class="row">
+            <div class="col-6">
+                <input type="submit" class="btn btn-link" value="Published" name="Published">
+            </div>
+        <input type="submit" class="btn btn-link" value="Delete" name="Delete">
+        </div>
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <input type="hidden" value="${feedback.idfeedback}" name="idfeedback">
     </div>

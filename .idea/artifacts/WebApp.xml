@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="WebApp">
+    <output-path>$PROJECT_DIR$/out/artifacts/WebApp</output-path>
+    <root id="archive" name="WebApp.jar" />
+  </artifact>
+</component>
