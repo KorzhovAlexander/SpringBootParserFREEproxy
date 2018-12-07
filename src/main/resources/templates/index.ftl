@@ -4,15 +4,12 @@
 <#include "macros/security.ftl">
 
 <@standart.standart>
-
-    <@navbar.navbar/>
-<#--HEADER-->
 <script defer src="/static/js/location.js"></script>
 <script defer src="/static/js/buttom_down.js"></script>
 <script defer src="/static/js/searchMainStatick.js"></script>
 <script defer src="/static/js/ajaxFeedback.js"></script>
-
-
+<#--HEADER-->
+    <@navbar.navbar/>
 <section style="height: 100%;">
     <div class="container text-center">
         <h1>Socks Proxy</h1>
@@ -21,7 +18,7 @@
     </div>
     <div class="container py-lg-4">
         <div class="row">
-            <table class="table top-cover col-6" style="width: 100%; max-width: 50%;">
+            <table class="table top-cover col-6">
                 <thead class="text-center">
                 <tr>
                     <th>Param</th>
@@ -177,7 +174,6 @@
                                        disabled>
                             </div>
     </#if>
-                        <!-- ------------------ -->
 
                         <div class="form-group">
                             <label for="MessageFormControlTextarea1">Message</label>

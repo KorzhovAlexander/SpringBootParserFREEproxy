@@ -46,32 +46,30 @@ public class userService implements UserDetailsService {
         user UserFromDatabase = userRepository.findByUsername(user.getUsername());
         if ((UserFromDatabase != null) || (user.getUsername().isEmpty()) || (user.getPassword().isEmpty()) || (user.getMail().isEmpty()))
             return false;
-        String mail=user.getMail();
 
-        user.setMail(passwordEncoder.encode(user.getMail()));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(false);
         user.setRole(roleRepository.getFirstByIdRole(1));
 
         userRepository.save(user);
-        sendAndCreateActivationCode(user,mail);
+        sendAndCreateActivationCode(user);
         return true;
     }
 
 //    @Async
-    public void sendAndCreateActivationCode(user user, String mail){
+    public void sendAndCreateActivationCode(user user){
         activation_code activation_code = new activation_code();
         activation_code.setIdUser(user.getIdUser());
         activation_code.setActivationcode(UUID.randomUUID().toString());
         activationRepo.save(activation_code);
         String message = String.format(
                 "Hello, %s! \n" +
-                        "Welcome to proxysocks. Please, visit next link: http://localhost:8080/Register/%s",
+                        "Welcome to proxysocks. Please, visit next link: <a href="+'"'+"http://localhost:8080/Register/%s>"+'"'+"LINK</a>",
                 user.getUsername(),
                 activation_code.getActivationcode()
         );
-//user.getMail()
-        mailSender.send(mail, "Activation code", message);
+
+        mailSender.send(user.getMail(), "Activation code", message);
     }
 
 

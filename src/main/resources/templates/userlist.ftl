@@ -4,60 +4,34 @@
 <@standartTemplate.standart>
 <@nav.navbar/>
 <section>
-<div class="container text-center">
-<table class="table">
+<table class="table top-cover col-8">
     <thead class="text-center font-weight-bold">
     <tr>
-        <td>idUser</td>
+        <td class="d-none">idUser</td>
+        <td>Email</td>
         <td>Username</td>
         <td>Password</td>
-        <td>NameRole</td>
-        <td>New Role</td>
+        <td>Name Role</td>
+        <td>Edit</td>
     </tr>
     </thead>
     <tbody>
 <#list userlist as user>
 
-    <tr class="formForEdit">
-        <td class="iduser">${user.idUser}</td>
+    <tr>
+        <td class="d-none">${user.idUser?c}</td>
+        <td>${(user.mail)!}</td>
         <td>${user.username}</td>
         <td>${user.password}</td>
-        <#if user.role??>
         <td>${user.role.nameRole}</td>
-        <td>
-            <form action="/setuser" method="POST" name="roleName">
-                <select name="idRole" class="form-control form-control-sm idrole">
-                    <#list rolelist as role>
-                        <option class="idRole" value="${role.idRole}">${role.nameRole}</option>
-                    </#list>
-                </select>
-                <input type="hidden" name="username" value="${user.username}">
-                <input type="hidden" value="${_csrf.token}" name="_csrf" class="csrf">
-                <input type="submit" class="btn btn-sm btn-secondary col align-self-center"  value="Apply">
-            </form>
-
-
-
+        <td class="row">
+            <i class="fa fa-pencil ml-1" aria-hidden="true"></i>
+            <i class="fa fa-trash ml-1" aria-hidden="true"></i>
+            <i class="fa fa-ban ml-1" aria-hidden="true"></i>
         </td>
-        <#else> <td><i>null</i></td>
-
-            <td>
-                <form action="/" method="POST" name="roleName" class="formForEdit">
-                    <select name="roleName" class="form-control form-control-sm idrole">
-                    <#list rolelist as role>
-                        <option class="idRole" value="${role.idRole}">${role.nameRole}</option>
-                    </#list>
-                    </select>
-                    <input type="hidden" value="${_csrf.token}" name="_csrf" class="csrf">
-                    <input type="submit" class="btn btn-sm btn-secondary col align-self-center" value="Apply">
-                </form>
-            </td>
-        </#if>
     </tr>
 </#list>
-
     </tbody>
 </table>
-</div>
 </section>
 </@standartTemplate.standart>
