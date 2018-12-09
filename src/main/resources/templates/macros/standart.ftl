@@ -15,8 +15,10 @@
 
         <link href="https://fonts.googleapis.com/css?family=Rationale" rel="stylesheet">
 
-        <#--<script src="/static/js/turbolinks.js" type="application/javascript"></script>-->
         <script src="/static/js/jquery-3.3.1.min.js" type="application/javascript"></script>
+
+    <#--<script src="https://code.jquery.com/jquery-3.3.1.min.js" rel="script"></script>-->
+    <#--<script src="/static/js/turbolinks.js" type="application/javascript"></script>-->
 <#--
         <script defer src="/static/js/bootstrap.bundle.min.js" type="application/javascript"></script>
 -->

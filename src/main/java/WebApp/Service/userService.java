@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -34,15 +35,18 @@ public class userService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-            return userRepository.findByUsername(username);
-    }
-
-    public user getUserLike(String username){
         return userRepository.findByUsername(username);
     }
-    public Iterable<user> getEmailLike(String email){return userRepository.findByMail(email);}
 
-    public boolean createUser(user user){
+    public user getUserLike(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public Iterable<user> getEmailLike(String email) {
+        return userRepository.findByMail(email);
+    }
+
+    public boolean createUser(user user) {
         user UserFromDatabase = userRepository.findByUsername(user.getUsername());
         if ((UserFromDatabase != null) || (user.getUsername().isEmpty()) || (user.getPassword().isEmpty()) || (user.getMail().isEmpty()))
             return false;
@@ -56,15 +60,19 @@ public class userService implements UserDetailsService {
         return true;
     }
 
-//    @Async
-    public void sendAndCreateActivationCode(user user){
+    public List<user> findAll() {
+        return userRepository.findAll();
+    }
+
+    //    @Async
+    public void sendAndCreateActivationCode(user user) {
         activation_code activation_code = new activation_code();
         activation_code.setIdUser(user.getIdUser());
         activation_code.setActivationcode(UUID.randomUUID().toString());
         activationRepo.save(activation_code);
         String message = String.format(
                 "Hello, %s! \n" +
-                        "Welcome to proxysocks. Please, visit next link: <a href="+'"'+"http://localhost:8080/Register/%s>"+'"'+"LINK</a>",
+                        "Welcome to proxysocks. Please, visit next link: <a href=" + '"' + "http://localhost:8080/Register/%s>" + '"' + "LINK</a>",
                 user.getUsername(),
                 activation_code.getActivationcode()
         );
@@ -72,19 +80,45 @@ public class userService implements UserDetailsService {
         mailSender.send(user.getMail(), "Activation code", message);
     }
 
+    public void updateuser(Integer iduser, String email, String username, String password, String nameRole) {
+        user user = userRepository.findByIdUser(iduser);
+        user.setRole(roleRepository.findByNameRole(nameRole));
+        user.setUsername(username);
+        user.setMail(email);
+        if (!password.equals("VALUE ENCRYPTED")) user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
 
-    public boolean parseCode(String code){
-        activation_code activation_code= activationRepo.findByActivationcode(code);
-        if(activation_code!=null){
+    public void banuser(Integer iduser) {
+        user user = userRepository.findByIdUser(iduser);
+        if (user.getRole().getIdRole() != 3) {
+            user.setRole(roleRepository.findByNameRole("Ban"));
+            user.setActive(false);
+        } else {
+            user.setRole(roleRepository.findByNameRole("User"));
+            user.setActive(true);
+        }
+        userRepository.save(user);
+    }
+
+    public void deleteuserbyid(Integer iduser) {
+        userRepository.delete(userRepository.findByIdUser(iduser));
+    }
+
+
+    public boolean parseCode(String code) {
+        activation_code activation_code = activationRepo.findByActivationcode(code);
+        if (activation_code != null) {
             user user = userRepository.findByIdUser(activation_code.getIdUser());
             user.setActive(true);
             userRepository.save(user);
-        return true;}
+            return true;
+        }
         return false;
     }
 
-    public boolean createGuestUser(String email){
-        if (getEmailLike(email)!=null){
+    public boolean createGuestUser(String email) {
+        if (getEmailLike(email) != null) {
             user user = new user();
             user.setActive(false);
             user.setMail(email);
@@ -92,7 +126,7 @@ public class userService implements UserDetailsService {
             user.setUsername("");
             user.setRole(roleRepository.getFirstByIdRole(4)); /*Guest role*/
             userRepository.save(user);
-        return true;
+            return true;
         }
         return false;
     }
