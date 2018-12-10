@@ -129,7 +129,9 @@
 <section>
     <div class="container">
         <div class="table-responsive text-center">
-            <p id="NextStep" class="text-center" style="font-size: 2em">Table Proxy</p>
+            <h1 id="NextStep" class="text-center">Table Proxy</h1>
+            <span class="separator"></span>
+            <br>
 
         <#--TABLE-->
                 <@tableproxy.table/>
@@ -209,7 +211,7 @@
             <div class="col-sm-2">
                 <h5>Project code</h5>
                 <ul>
-                    <li><a href="#"><i class="fa fa-github" aria-hidden="true"></i> Open sours</a></li>
+                    <li><a href="https://github.com/HoneyGood/WebApp"><i class="fa fa-github" aria-hidden="true"></i> Open sours</a></li>
                 </ul>
             </div>
             <div class="col-sm-6">

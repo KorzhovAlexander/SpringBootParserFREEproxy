@@ -12,6 +12,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(Home)</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/FAQ">FAQ <span class="sr-only">(FAQ)</span></a>
+                </li>
 
                 <#if user??>
                     <#if role=="Admin">
@@ -34,7 +37,7 @@
 
                             </li>-->
                 <li class="nav-item">
-                    <a class="nav-link" href="/allproxy">All proxy</a>
+                    <a class="nav-link disabled" href="/#">All proxy</a>
                 </li>
             </ul>
 
@@ -43,7 +46,7 @@
                         </form>-->
 
             <#if user??>
-                        <button class="button btn btn-warning mr-3" data-toggle="modal"
+                        <button class="button btn btn-outline-warning mr-3 my-sm-0" data-toggle="modal"
                                 data-target="#modalDLGforSearch">VIP Searching
                         </button>
 
@@ -52,7 +55,7 @@
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
             </form>
             <#else>
-                        <button class="button btn btn-warning mr-3" data-toggle="modal"
+                        <button class="button btn btn-outline-warning mr-3 my-sm-0" data-toggle="modal"
                                 data-target="#modalDLG">VIP Searching
                         </button>
             <#--<button class="btn btn-outline-info my-2 my-sm-0" onclick="location.href='/login'">Log In</button>-->

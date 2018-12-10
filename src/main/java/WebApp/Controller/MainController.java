@@ -42,6 +42,11 @@ public class MainController {
         this.feedbackService = feedbackService;
     }
 
+    @GetMapping("/FAQ")
+    public String faq(){
+        return "faq";
+    }
+
     @GetMapping("/")
     public String getAllUsers(Model model, HttpServletRequest ht) {
         model.addAttribute("proxysocks", searchService.getStatic50Proxy("%"));
