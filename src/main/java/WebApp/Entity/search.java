@@ -9,17 +9,9 @@ import javax.persistence.*;
 public class search {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rows")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "rows",unique = true, nullable = false)
     private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Column(name = "iduser")
     private int iduser;
@@ -34,10 +26,10 @@ public class search {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "idproxy", insertable = false, updatable = false, referencedColumnName = "id" )
+    @JoinColumn(name = "idproxy", insertable = false, updatable = false, referencedColumnName = "id")
     private proxysocks proxysocks;
 
-/*2 entity*/
+    /*2 entity*/
 
 
     public WebApp.Entity.user getUser() {
@@ -56,7 +48,14 @@ public class search {
         this.proxysocks = proxysocks;
     }
 
-//getters and setters
+    //getters and setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getIduser() {
         return iduser;
@@ -73,4 +72,5 @@ public class search {
     public void setIdproxy(int idproxy) {
         this.idproxy = idproxy;
     }
+
 }

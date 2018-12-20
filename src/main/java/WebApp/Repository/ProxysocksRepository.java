@@ -16,7 +16,7 @@ public interface ProxysocksRepository extends JpaRepository<proxysocks,Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "ALTER TABLE proxysocks AUTO_INCREMENT=0;",nativeQuery = true)
+    @Query(value = "ALTER TABLE proxysocks AUTO_INCREMENT=1;",nativeQuery = true)
     void autoincrementNull();
 
     List<proxysocks> getTop50ByPortLike(String s);
