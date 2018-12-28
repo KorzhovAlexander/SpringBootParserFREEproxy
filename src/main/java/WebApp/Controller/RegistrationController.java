@@ -25,7 +25,6 @@ public class RegistrationController {
 
     @PostMapping("/Register")
     public String AddUser(user user) {
-
         if (userService.createUser(user)) {
 //            userService.sendAndCreateActivationCode(user);
             return "redirect:/login";
