@@ -30,7 +30,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
+        //запускаем парсеры
         while (true) {
             searchRepository.deleteAll();
             searchRepository.autoincrementNull();

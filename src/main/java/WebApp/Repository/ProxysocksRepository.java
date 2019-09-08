@@ -38,16 +38,4 @@ public interface ProxysocksRepository extends JpaRepository<proxysocks,Long> {
     @Query(value = "select proxysocks.* from proxysocks left join search on proxysocks.id=search.idProxy where id in (select idproxy from search) and idUser=:id and code like :code", nativeQuery = true)
     List<proxysocks> getMyProxy(@Param("id") Integer id, @Param("code") String code);
 
-
-    /**
-     * более поздние записи (с большим id) оказывались в начале списка. Для этого называем наш новый метод findAllByOrderByIdDesc()
-     *
-     * JpaRepository CrudRepository
-     *
-     * Iterable<proxysocks> getTop20ByPortLike(String port);
-     * */
-
-
-
-
 }
